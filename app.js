@@ -4,6 +4,7 @@ const http = require("http");
 const https = require("https");
 const fs = require("fs");
 const cors = require('cors');
+const validacionRouter = require("./router/validacion");
 
 dotenv.config();
 
@@ -11,8 +12,8 @@ const app = express();
 app.use(express.json());
 
 const FRONTEND_ORIGIN = process.env.NODE_ENV === 'PRODUCCION' 
-    ? process.env.FRONTEND_URL_PROD 
-    : ['http://localhost:5173', 'http://127.0.0.1:5173'];
+? process.env.FRONTEND_URL_PROD 
+: ['http://localhost:5173', 'http://127.0.0.1:5173'];
 
 const corsOptions = {
     origin: FRONTEND_ORIGIN, 
@@ -23,6 +24,7 @@ const corsOptions = {
 };
 app.use(cors(corsOptions)); 
 
+validacionRouter(app);
 
 let server;
 if (process.env.NODE_ENV === 'PRODUCCION') {
