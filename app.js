@@ -6,6 +6,8 @@ const fs = require("fs");
 const cors = require('cors');
 const validacionRouter = require("./router/validacion");
 
+const routerFirmas = require("./router/firma");
+
 dotenv.config();
 
 const app = express();
@@ -25,6 +27,7 @@ const corsOptions = {
 app.use(cors(corsOptions)); 
 
 validacionRouter(app);
+routerFirmas(app);
 
 let server;
 if (process.env.NODE_ENV === 'PRODUCCION') {
